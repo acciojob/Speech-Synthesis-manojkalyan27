@@ -24,43 +24,6 @@
       <button id="stop">Stop!</button>
       <button id="speak">Speak</button>
     </div>
-
-<script>
-  const msg = new SpeechSynthesisUtterance();
-  let voices = [];
-  const voicesDropdown = document.querySelector('[name="voice"]');
-  const options = document.querySelectorAll('[type="range"], [name="text"]');
-  const speakButton = document.querySelector('#speak');
-  const stopButton = document.querySelector('#stop');
-  const rate = document.querySelector('[name="rate"]');
-
-  //Your code goes here
-    window.speechSynthesis.onvoiceschanged = () => {
-        voices = window.speechSynthesis.getVoices();
-        msg.voice = voices[0];
-
-        voices.forEach((voice,i) => {
-            return voicesDropdown.options[i] = new Option(voice.name,i)
-        })
-    }
-
-    voicesDropdown.addEventListener("change", () => {
-        msg.voice = voices[voicesDropdown.value]        
-    })
-
-	speakButton.addEventListener("click",()=>{
-        msg.text = document.querySelector('textarea').value;
-        window.speechSynthesis.speak(msg);
-
-        msg.text.rate = rate.value;
-        msg.speak(msg)
-    })
-
-    stopButton.addEventListener("click",()=>{
-        window.speechSynthesis.stop;
-})
-
-</script>
-
+<script src="./script.js"></script>
 </body>
 </html>

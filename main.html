@@ -9,9 +9,7 @@
 <body>
 
     <div class="voiceinator">
-
       <h1>The Voiceinator 5000</h1>
-
       <select name="voice" id="voices">
         <option value="">Select A Voice</option>
       </select>
@@ -25,7 +23,6 @@
       <textarea name="text">Hello! I love JavaScript 👍</textarea>
       <button id="stop">Stop!</button>
       <button id="speak">Speak</button>
-
     </div>
 
 <script>
@@ -35,8 +32,34 @@
   const options = document.querySelectorAll('[type="range"], [name="text"]');
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
+  const rate = document.querySelector('[name="rate"]');
 
   //Your code goes here
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = window.speechSynthesis.getVoices();
+        msg.voice = voices[0];
+
+        voices.forEach((voice,i) => {
+            return voicesDropdown.options[i] = new Option(voice.name,i)
+        })
+    }
+
+    voicesDropdown.addEventListener("change", () => {
+        msg.voice = voices[voicesDropdown.value]        
+    })
+
+	speakButton.addEventListener("click",()=>{
+        msg.text = document.querySelector('textarea').value;
+        window.speechSynthesis.speak(msg);
+
+        msg.text.rate = rate.value;
+        msg.speak(msg)
+    })
+
+    stopButton.addEventListener("click",()=>{
+        window.speechSynthesis.stop;
+})
+
 </script>
 
 </body>
